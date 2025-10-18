@@ -1,4 +1,4 @@
-namespace SubBytesLib;
+namespace AES;
 
 public class SubBytes
 {

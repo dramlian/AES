@@ -1,6 +1,6 @@
 ﻿namespace AES.Tests;
 
-using SubBytesLib;
+using AES;
 
 // Test vector from NIST FIPS-197, Appendix B, AES-128 example, SubBytes
 public class SubBytesTests
