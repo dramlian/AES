@@ -2,12 +2,6 @@ namespace AES;
 
 public class ShiftRows
 {
-
-    public ShiftRows()
-    {
-
-    }
-
     public void ShiftRowsTransform(byte[] input)
     {
         var b4 = input[4]; var b5 = input[5]; var b6 = input[6]; var b7 = input[7];

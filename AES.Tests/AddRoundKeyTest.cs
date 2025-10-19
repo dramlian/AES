@@ -1,0 +1,121 @@
+namespace AES.Tests;
+
+using AES;
+
+// Test vector from NIST FIPS-197, Appendix B, AES-128 example, ShiftRows
+public class AddRoundKeyTest
+{
+    [Fact]
+    public void Row0Test()
+    {
+        byte[] state = new byte[16]
+        {
+            0x04, 0xe0, 0x48, 0x28,
+            0x66, 0xcb, 0xf8, 0x06,
+            0x81, 0x19, 0xd3, 0x26,
+            0xe5, 0x9a, 0x7a, 0x4c
+        };
+
+        byte[] stateOriginal = (byte[])state.Clone();
+
+        byte[] roundKey = new byte[16]
+        {
+            0xa0, 0x88, 0x23, 0x2a,
+            0xfa, 0x54, 0xa3, 0x6c,
+            0xfe, 0x2c, 0x39, 0x76,
+            0x17, 0xb1, 0x39, 0x05
+        };
+
+        var addRoundKey = new AddRoundKey();
+        addRoundKey.AddRoundKeyTransform(state, roundKey);
+
+        byte[] expectedState = new byte[16]
+        {
+            0xa4, 0x68, 0x6b, 0x02,
+            0x9c, 0x9f, 0x5b, 0x6a,
+            0x7f, 0x35, 0xea, 0x50,
+            0xf2, 0x2b, 0x43, 0x49
+        };
+
+        Assert.Equal(expectedState, state);
+
+        addRoundKey.AddRoundKeyTransform(state, roundKey);
+        Assert.Equal(stateOriginal, state);
+    }
+
+    [Fact]
+    public void Row1Test()
+    {
+        byte[] state = new byte[16]
+        {
+            0x58, 0x1b, 0xdb, 0x1b,
+            0x4d, 0x4b, 0xe7, 0x6b,
+            0xca, 0x5a, 0xca, 0xb0,
+            0xf1, 0xac, 0xa8, 0xe5
+        };
+
+        byte[] stateOriginal = (byte[])state.Clone();
+
+        byte[] roundKey = new byte[16]
+        {
+            0xf2, 0x7a, 0x59, 0x73,
+            0xc2, 0x96, 0x35, 0x59,
+            0x95, 0xb9, 0x80, 0xf6,
+            0xf2, 0x43, 0x7a, 0x7f
+        };
+
+        var addRoundKey = new AddRoundKey();
+        addRoundKey.AddRoundKeyTransform(state, roundKey);
+
+        byte[] expectedState = new byte[16]
+        {
+            0xaa, 0x61, 0x82, 0x68,
+            0x8f, 0xdd, 0xd2, 0x32,
+            0x5f, 0xe3, 0x4a, 0x46,
+            0x03, 0xef, 0xd2, 0x9a
+        };
+
+        Assert.Equal(expectedState, state);
+
+        addRoundKey.AddRoundKeyTransform(state, roundKey);
+        Assert.Equal(stateOriginal, state);
+    }
+
+    [Fact]
+    public void Row2Test()
+    {
+        byte[] state = new byte[16]
+       {
+            0x75, 0x20, 0x53, 0xbb,
+            0xec, 0x0b, 0xc0, 0x25,
+            0x09, 0x63, 0xcf, 0xd0,
+            0x93, 0x33, 0x7c, 0xdc
+       };
+
+        byte[] stateOriginal = (byte[])state.Clone();
+
+        byte[] roundKey = new byte[16]
+        {
+            0x3d, 0x47, 0x1e, 0x6d,
+            0x80, 0x16, 0x23, 0x7a,
+            0x47, 0xfe, 0x7e, 0x88,
+            0x7d, 0x3e, 0x44, 0x3b
+        };
+
+        var addRoundKey = new AddRoundKey();
+        addRoundKey.AddRoundKeyTransform(state, roundKey);
+
+        byte[] expectedState = new byte[16]
+        {
+            0x48, 0x67, 0x4d, 0xd6,
+            0x6c, 0x1d, 0xe3, 0x5f,
+            0x4e, 0x9d, 0xb1, 0x58,
+            0xee, 0x0d, 0x38, 0xe7
+        };
+
+        Assert.Equal(expectedState, state);
+
+        addRoundKey.AddRoundKeyTransform(state, roundKey);
+        Assert.Equal(stateOriginal, state);
+    }
+}
