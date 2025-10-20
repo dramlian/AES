@@ -14,11 +14,6 @@ public class MixColumnsTest
             0x30, 0xae, 0xf1, 0xe5
         };
 
-        byte[] inputOriginal = (byte[])input.Clone();
-
-        MixColumns mixColumns = new MixColumns();
-        mixColumns.MixColumnsTransform(input);
-
         byte[] expectedOutput = {
             0x04, 0xe0, 0x48, 0x28,
             0x66, 0xcb, 0xf8, 0x06,
@@ -26,10 +21,7 @@ public class MixColumnsTest
             0xe5, 0x9a, 0x7a, 0x4c
         };
 
-        Assert.Equal(expectedOutput, input);
-
-        mixColumns.InvMixColumnsTransform(input);
-        Assert.Equal(inputOriginal, input);
+        MixColumnsTestAction(input, expectedOutput);
     }
 
     [Fact]
@@ -42,11 +34,6 @@ public class MixColumnsTest
             0x3b, 0x89, 0xf1, 0x1a
         };
 
-        byte[] inputOriginal = (byte[])input.Clone();
-
-        MixColumns mixColumns = new MixColumns();
-        mixColumns.MixColumnsTransform(input);
-
         byte[] expectedOutput = {
             0x58, 0x1b, 0xdb, 0x1b,
             0x4d, 0x4b, 0xe7, 0x6b,
@@ -54,10 +41,7 @@ public class MixColumnsTest
             0xf1, 0xac, 0xa8, 0xe5
         };
 
-        Assert.Equal(expectedOutput, input);
-
-        mixColumns.InvMixColumnsTransform(input);
-        Assert.Equal(inputOriginal, input);
+        MixColumnsTestAction(input, expectedOutput);
     }
 
     [Fact]
@@ -70,11 +54,6 @@ public class MixColumnsTest
             0xb8, 0x7b, 0xdf, 0xb5
         };
 
-        byte[] inputOriginal = (byte[])input.Clone();
-
-        MixColumns mixColumns = new MixColumns();
-        mixColumns.MixColumnsTransform(input);
-
         byte[] expectedOutput = {
                 0x75, 0x20, 0x53, 0xbb,
                 0xec, 0x0b, 0xc0, 0x25,
@@ -82,8 +61,15 @@ public class MixColumnsTest
                 0x93, 0x33, 0x7c, 0xdc
         };
 
-        Assert.Equal(expectedOutput, input);
+        MixColumnsTestAction(input, expectedOutput);
+    }
 
+    private void MixColumnsTestAction(byte[] input, byte[] expectedOutput)
+    {
+        byte[] inputOriginal = (byte[])input.Clone();
+        MixColumns mixColumns = new MixColumns();
+        mixColumns.MixColumnsTransform(input);
+        Assert.Equal(expectedOutput, input);
         mixColumns.InvMixColumnsTransform(input);
         Assert.Equal(inputOriginal, input);
     }

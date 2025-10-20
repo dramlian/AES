@@ -16,8 +16,6 @@ public class AddRoundKeyTest
             0xe5, 0x9a, 0x7a, 0x4c
         };
 
-        byte[] stateOriginal = (byte[])state.Clone();
-
         byte[] roundKey = new byte[16]
         {
             0xa0, 0x88, 0x23, 0x2a,
@@ -26,9 +24,6 @@ public class AddRoundKeyTest
             0x17, 0xb1, 0x39, 0x05
         };
 
-        var addRoundKey = new AddRoundKey();
-        addRoundKey.AddRoundKeyTransform(state, roundKey);
-
         byte[] expectedState = new byte[16]
         {
             0xa4, 0x68, 0x6b, 0x02,
@@ -36,11 +31,7 @@ public class AddRoundKeyTest
             0x7f, 0x35, 0xea, 0x50,
             0xf2, 0x2b, 0x43, 0x49
         };
-
-        Assert.Equal(expectedState, state);
-
-        addRoundKey.AddRoundKeyTransform(state, roundKey);
-        Assert.Equal(stateOriginal, state);
+        AddRoundKeyTestAction(state, roundKey, expectedState);
     }
 
     [Fact]
@@ -54,8 +45,6 @@ public class AddRoundKeyTest
             0xf1, 0xac, 0xa8, 0xe5
         };
 
-        byte[] stateOriginal = (byte[])state.Clone();
-
         byte[] roundKey = new byte[16]
         {
             0xf2, 0x7a, 0x59, 0x73,
@@ -63,9 +52,6 @@ public class AddRoundKeyTest
             0x95, 0xb9, 0x80, 0xf6,
             0xf2, 0x43, 0x7a, 0x7f
         };
-
-        var addRoundKey = new AddRoundKey();
-        addRoundKey.AddRoundKeyTransform(state, roundKey);
 
         byte[] expectedState = new byte[16]
         {
@@ -75,10 +61,7 @@ public class AddRoundKeyTest
             0x03, 0xef, 0xd2, 0x9a
         };
 
-        Assert.Equal(expectedState, state);
-
-        addRoundKey.AddRoundKeyTransform(state, roundKey);
-        Assert.Equal(stateOriginal, state);
+        AddRoundKeyTestAction(state, roundKey, expectedState);
     }
 
     [Fact]
@@ -92,8 +75,6 @@ public class AddRoundKeyTest
             0x93, 0x33, 0x7c, 0xdc
        };
 
-        byte[] stateOriginal = (byte[])state.Clone();
-
         byte[] roundKey = new byte[16]
         {
             0x3d, 0x47, 0x1e, 0x6d,
@@ -101,9 +82,6 @@ public class AddRoundKeyTest
             0x47, 0xfe, 0x7e, 0x88,
             0x7d, 0x3e, 0x44, 0x3b
         };
-
-        var addRoundKey = new AddRoundKey();
-        addRoundKey.AddRoundKeyTransform(state, roundKey);
 
         byte[] expectedState = new byte[16]
         {
@@ -113,8 +91,15 @@ public class AddRoundKeyTest
             0xee, 0x0d, 0x38, 0xe7
         };
 
-        Assert.Equal(expectedState, state);
+        AddRoundKeyTestAction(state, roundKey, expectedState);
+    }
 
+    private void AddRoundKeyTestAction(byte[] state, byte[] roundKey, byte[] expectedState)
+    {
+        byte[] stateOriginal = (byte[])state.Clone();
+        var addRoundKey = new AddRoundKey();
+        addRoundKey.AddRoundKeyTransform(state, roundKey);
+        Assert.Equal(expectedState, state);
         addRoundKey.AddRoundKeyTransform(state, roundKey);
         Assert.Equal(stateOriginal, state);
     }

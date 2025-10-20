@@ -24,12 +24,7 @@ public class SubBytesTests
             0xAE, 0xF1, 0xE5, 0x30
         };
 
-        SubBytes sb = new SubBytes();
-        byte[] cyphered = sb.SubBytesTransform(input);
-        Assert.Equal(expectedOutput, cyphered);
-
-        byte[] plaintext = sb.InvSubBytesTransform(cyphered);
-        Assert.Equal(input, plaintext);
+        SubBytesTestAction(input, expectedOutput);
     }
 
     [Fact]
@@ -51,12 +46,7 @@ public class SubBytesTests
             0x89, 0xF1, 0x1A, 0x3B
         };
 
-        SubBytes sb = new SubBytes();
-        byte[] cyphered = sb.SubBytesTransform(input);
-        Assert.Equal(expectedOutput, cyphered);
-
-        byte[] plaintext = sb.InvSubBytesTransform(cyphered);
-        Assert.Equal(input, plaintext);
+        SubBytesTestAction(input, expectedOutput);
     }
 
     [Fact]
@@ -78,10 +68,14 @@ public class SubBytesTests
             0x7B, 0xDF, 0xB5, 0xB8
         };
 
+        SubBytesTestAction(input, expectedOutput);
+    }
+
+    private void SubBytesTestAction(byte[] input, byte[] expectedOutput)
+    {
         SubBytes sb = new SubBytes();
         byte[] cyphered = sb.SubBytesTransform(input);
         Assert.Equal(expectedOutput, cyphered);
-
         byte[] plaintext = sb.InvSubBytesTransform(cyphered);
         Assert.Equal(input, plaintext);
     }
