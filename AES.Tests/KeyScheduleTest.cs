@@ -1,0 +1,82 @@
+namespace AES.Tests;
+
+using AES;
+
+public class KeyScheduleTest
+{
+
+    [Fact]
+    public void Row0Test()
+    {
+        byte[] input = new byte[16]
+        {
+            0x2b, 0x28, 0xab, 0x09,
+            0x7e, 0xae, 0xf7, 0xcf,
+            0x15, 0xd2, 0x15, 0x4f,
+            0x16, 0xa6, 0x88, 0x3c
+        };
+
+        byte[] expectedOutput = new byte[16]
+        {
+            0xa0, 0x88, 0x23, 0x2a,
+            0xfa, 0x54, 0xa3, 0x6c,
+            0xfe, 0x2c, 0x39, 0x76,
+            0x17, 0xb1, 0x39, 0x05
+        };
+
+        KeyScheduleTestAction(input, expectedOutput, 0);
+    }
+
+    [Fact]
+    public void Row1Test()
+    {
+        byte[] input = new byte[16]
+        {
+            0xa0, 0x88, 0x23, 0x2a,
+            0xfa, 0x54, 0xa3, 0x6c,
+            0xfe, 0x2c, 0x39, 0x76,
+            0x17, 0xb1, 0x39, 0x05
+        };
+
+        byte[] expectedOutput = new byte[16]
+        {
+            0xf2, 0x7a, 0x59, 0x73,
+            0xc2, 0x96, 0x35, 0x59,
+            0x95, 0xb9, 0x80, 0xf6,
+            0xf2, 0x43, 0x7a, 0x7f
+        };
+
+        KeyScheduleTestAction(input, expectedOutput, 1);
+    }
+
+    [Fact]
+    public void Row2Test()
+    {
+        byte[] input = new byte[16]
+        {
+            0xf2, 0x7a, 0x59, 0x73,
+            0xc2, 0x96, 0x35, 0x59,
+            0x95, 0xb9, 0x80, 0xf6,
+            0xf2, 0x43, 0x7a, 0x7f
+        };
+
+        byte[] expectedOutput = new byte[16]
+        {
+            0x3d, 0x47, 0x1e, 0x6d,
+            0x80, 0x16, 0x23, 0x7a,
+            0x47, 0xfe, 0x7e, 0x88,
+            0x7d, 0x3e, 0x44, 0x3b
+        };
+
+        KeyScheduleTestAction(input, expectedOutput, 2);
+    }
+
+    private void KeyScheduleTestAction(byte[] input, byte[] expectedOutput, int roundKey)
+    {
+        KeySchedule ks = new KeySchedule();
+        byte[] result = ks.CreateRoundKey(input, roundKey);
+        Assert.Equal(expectedOutput, result);
+    }
+
+}
+

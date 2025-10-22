@@ -1,3 +1,5 @@
+namespace AES;
+
 public class MixColumns
 {
     private byte GFMul(byte a, byte b)
