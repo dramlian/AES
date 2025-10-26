@@ -1,0 +1,164 @@
+namespace AES.Tests;
+
+using AES;
+
+/*
+NIST Special Publication 800-38A 2001 Edition page 24
+https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-38a.pdf
+This implementation is rowbased and NIST has
+colbased vectors hence the //Transpose method
+*/
+public class AESEncryptTest
+{
+    [Fact]
+    public void Block1()
+    {
+        byte[] input = new byte[16]
+        {
+            0x6b, 0xc1, 0xbe, 0xe2,
+            0x2e, 0x40, 0x9f, 0x96,
+            0xe9, 0x3d, 0x7e, 0x11,
+            0x73, 0x93, 0x17, 0x2a
+        };
+
+        byte[] key = new byte[16]
+        {
+            0x2b, 0x7e, 0x15, 0x16,
+            0x28, 0xae, 0xd2, 0xa6,
+            0xab, 0xf7, 0x15, 0x88,
+            0x09, 0xcf, 0x4f, 0x3c
+        };
+
+        byte[] expectedOutput = new byte[16]
+        {
+            0x3a,0xd7, 0x7b,0xb4,
+            0x0d,0x7a,0x36,0x60,
+            0xa8,0x9e,0xca,0xf3,
+            0x24,0x66,0xef,0x97
+        };
+        AESVectorTest(input, key, expectedOutput);
+    }
+
+    [Fact]
+    public void Block2()
+    {
+        byte[] input = new byte[16]
+        {
+            0xae, 0x2d, 0x8a, 0x57,
+            0x1e, 0x03, 0xac, 0x9c,
+            0x9e, 0xb7, 0x6f, 0xac,
+            0x45, 0xaf, 0x8e, 0x51
+        };
+
+        byte[] key = new byte[16]
+        {
+            0x2b, 0x7e, 0x15, 0x16,
+            0x28, 0xae, 0xd2, 0xa6,
+            0xab, 0xf7, 0x15, 0x88,
+            0x09, 0xcf, 0x4f, 0x3c
+        };
+
+        byte[] expectedOutput = new byte[16]
+        {
+            0xf5, 0xd3, 0xd5, 0x85,
+            0x03, 0xb9, 0x69, 0x9d,
+            0xe7, 0x85, 0x89, 0x5a,
+            0x96, 0xfd, 0xba, 0xaf
+        };
+        AESVectorTest(input, key, expectedOutput);
+    }
+
+    [Fact]
+    public void Block3()
+    {
+        byte[] input = new byte[16]
+        {
+            0x30, 0xc8, 0x1c, 0x46,
+            0xa3, 0x5c, 0xe4, 0x11,
+            0xe5, 0xfb, 0xc1, 0x19,
+            0x1a, 0x0a, 0x52, 0xef
+        };
+
+        byte[] key = new byte[16]
+        {
+            0x2b, 0x7e, 0x15, 0x16,
+            0x28, 0xae, 0xd2, 0xa6,
+            0xab, 0xf7, 0x15, 0x88,
+            0x09, 0xcf, 0x4f, 0x3c
+        };
+
+        byte[] expectedOutput = new byte[16]
+        {
+            0x43, 0xb1, 0xcd, 0x7f,
+            0x59, 0x8e, 0xce, 0x23,
+            0x88, 0x1b, 0x00, 0xe3,
+            0xed, 0x03, 0x06, 0x88
+        };
+        AESVectorTest(input, key, expectedOutput);
+    }
+
+    [Fact]
+    public void Block4()
+    {
+        byte[] input = new byte[16]
+        {
+            0xf6, 0x9f, 0x24, 0x45,
+            0xdf, 0x4f, 0x9b, 0x17,
+            0xad, 0x2b, 0x41, 0x7b,
+            0xe6, 0x6c, 0x37, 0x10
+        };
+
+        byte[] key = new byte[16]
+        {
+            0x2b, 0x7e, 0x15, 0x16,
+            0x28, 0xae, 0xd2, 0xa6,
+            0xab, 0xf7, 0x15, 0x88,
+            0x09, 0xcf, 0x4f, 0x3c
+        };
+
+        byte[] expectedOutput = new byte[16]
+        {
+            0x7b, 0x0c, 0x78, 0x5e,
+            0x27, 0xe8, 0xad, 0x3f,
+            0x82, 0x23, 0x20, 0x71,
+            0x04, 0x72, 0x5d, 0xd4
+        };
+        AESVectorTest(input, key, expectedOutput);
+    }
+
+
+    private void AESVectorTest(byte[] input, byte[] key, byte[] expectedOutput)
+    {
+        AESEncrypt aesCypher = new AESEncrypt(
+            new AddRoundKey(),
+            new SubBytes(),
+            new ShiftRows(),
+            new MixColumns(),
+            new KeySchedule()
+        );
+
+        AESDecrypt aesDecypher = new AESDecrypt(
+            new AddRoundKey(),
+            new SubBytes(),
+            new ShiftRows(),
+            new MixColumns(),
+            new KeySchedule()
+        );
+
+        input = Transpose(input);
+        key = Transpose(key);
+        aesCypher.Encrypt(input, key);
+        var encrypted = Transpose(input);
+        Assert.Equal(encrypted, expectedOutput);
+    }
+
+    private byte[] Transpose(byte[] data)
+    {
+        byte[] result = new byte[16];
+        for (int row = 0; row < 4; row++)
+            for (int col = 0; col < 4; col++)
+                result[row * 4 + col] = data[col * 4 + row];
+        return result;
+    }
+
+}
