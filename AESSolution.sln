@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AES", "AES\AES.csproj", "{7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AES.Tests", "AES.Tests\AES.Tests.csproj", "{A1B2C3D4-E5F6-7890-ABCD-1234567890AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AES.Benchmark", "AES.Benchmark\AES.Benchmark.csproj", "{5AC03CA4-737A-462D-8E14-CFAF0547DD0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{A1B2C3D4-E5F6-7890-ABCD-1234567890AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1B2C3D4-E5F6-7890-ABCD-1234567890AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1B2C3D4-E5F6-7890-ABCD-1234567890AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AC03CA4-737A-462D-8E14-CFAF0547DD0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC03CA4-737A-462D-8E14-CFAF0547DD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC03CA4-737A-462D-8E14-CFAF0547DD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC03CA4-737A-462D-8E14-CFAF0547DD0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
