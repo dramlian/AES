@@ -61,23 +61,3 @@ This project is for educational purposes only. Please refer to the license file 
 ## 🤝 Contributing
 
 This is an educational project. Feel free to fork and experiment, but remember this is not intended for production use.
-
-```
-
-Results of a benchmark project
-
-BenchmarkDotNet v0.15.4, Linux Ubuntu 24.04.3 LTS (Noble Numbat)
-12th Gen Intel Core i5-12450H 0.40GHz, 1 CPU, 12 logical and 8 physical cores
-.NET SDK 9.0.109
-[Host]     : .NET 9.0.8 (9.0.8, 9.0.825.36511), X64 RyuJIT x86-64-v3
-DefaultJob : .NET 9.0.8 (9.0.8, 9.0.825.36511), X64 RyuJIT x86-64-v3
-
-
-```
-
-| Method           |       Mean |    Error |   StdDev |
-| ---------------- | ---------: | -------: | -------: |
-| MyAesEncrypt     | 4,048.8 ns | 74.34 ns | 62.07 ns |
-| MyAesDecrypt     | 7,394.6 ns | 31.49 ns | 29.46 ns |
-| SystemAesEncrypt |   832.0 ns |  3.82 ns |  3.58 ns |
-| SystemAesDecrypt |   847.2 ns |  5.56 ns |  4.64 ns |
