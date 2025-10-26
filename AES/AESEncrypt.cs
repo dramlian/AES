@@ -1,6 +1,6 @@
 using AES;
 
-public class AESCypher
+public class AESEncrypt
 {
     private readonly AddRoundKey _addRoundKey;
     private readonly SubBytes _subBytes;
@@ -8,7 +8,7 @@ public class AESCypher
     private readonly MixColumns _mixColumns;
     private readonly KeySchedule _keySchedule;
 
-    public AESCypher(AddRoundKey addRoundKey, SubBytes subBytes, ShiftRows shiftRows, MixColumns mixColumns, KeySchedule keySchedule)
+    public AESEncrypt(AddRoundKey addRoundKey, SubBytes subBytes, ShiftRows shiftRows, MixColumns mixColumns, KeySchedule keySchedule)
     {
         _addRoundKey = addRoundKey;
         _subBytes = subBytes;
