@@ -144,12 +144,16 @@ public class AESEncryptTest
             new MixColumns(),
             new KeySchedule()
         );
-
+        byte[] originalInput = (byte[])input.Clone();
         input = Transpose(input);
         key = Transpose(key);
         aesCypher.Encrypt(input, key);
         var encrypted = Transpose(input);
         Assert.Equal(encrypted, expectedOutput);
+
+        aesDecypher.Decrypt(input, key);
+        input = Transpose(input);
+        Assert.Equal(input, originalInput);
     }
 
     private byte[] Transpose(byte[] data)
