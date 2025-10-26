@@ -8,7 +8,7 @@ https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-38a.pdf
 This implementation is rowbased and NIST has
 colbased vectors hence the //Transpose method
 */
-public class AESEncryptTest
+public class AESTest
 {
     [Fact]
     public void Block1()
