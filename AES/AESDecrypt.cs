@@ -37,7 +37,7 @@ public class AESDecrypt
         }
     }
 
-    public byte[][] GenerateAllRoundKeys(byte[] key, int totalRounds)
+    private byte[][] GenerateAllRoundKeys(byte[] key, int totalRounds)
     {
         byte[][] roundKeys = new byte[totalRounds + 1][];
         roundKeys[0] = key;
