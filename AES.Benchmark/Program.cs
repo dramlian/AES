@@ -19,8 +19,8 @@ public class AESBench
             block[i] = (byte)(i * 2);
         }
 
-        myAes = new AESEncrypt(new AddRoundKey(), new SubBytes(), new ShiftRows(), new MixColumns(), new KeySchedule());
-        myAesDec = new AESDecrypt(new AddRoundKey(), new SubBytes(), new ShiftRows(), new MixColumns(), new KeySchedule());
+        myAes = new AESEncrypt();
+        myAesDec = new AESDecrypt();
 
         systemAes = Aes.Create();
         systemAes.KeySize = 128;

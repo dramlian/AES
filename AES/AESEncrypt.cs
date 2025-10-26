@@ -8,13 +8,13 @@ public class AESEncrypt
     private readonly MixColumns _mixColumns;
     private readonly KeySchedule _keySchedule;
 
-    public AESEncrypt(AddRoundKey addRoundKey, SubBytes subBytes, ShiftRows shiftRows, MixColumns mixColumns, KeySchedule keySchedule)
+    public AESEncrypt()
     {
-        _addRoundKey = addRoundKey;
-        _subBytes = subBytes;
-        _shiftRows = shiftRows;
-        _mixColumns = mixColumns;
-        _keySchedule = keySchedule;
+        _addRoundKey = new AddRoundKey();
+        _subBytes = new SubBytes();
+        _shiftRows = new ShiftRows();
+        _mixColumns = new MixColumns();
+        _keySchedule = new KeySchedule();
     }
 
     public void Encrypt(byte[] input, byte[] key)

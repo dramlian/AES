@@ -129,21 +129,9 @@ public class AESEncryptTest
 
     private void AESVectorTest(byte[] input, byte[] key, byte[] expectedOutput)
     {
-        AESEncrypt aesCypher = new AESEncrypt(
-            new AddRoundKey(),
-            new SubBytes(),
-            new ShiftRows(),
-            new MixColumns(),
-            new KeySchedule()
-        );
+        AESEncrypt aesCypher = new AESEncrypt();
+        AESDecrypt aesDecypher = new AESDecrypt();
 
-        AESDecrypt aesDecypher = new AESDecrypt(
-            new AddRoundKey(),
-            new SubBytes(),
-            new ShiftRows(),
-            new MixColumns(),
-            new KeySchedule()
-        );
         byte[] originalInput = (byte[])input.Clone();
         input = Transpose(input);
         key = Transpose(key);
