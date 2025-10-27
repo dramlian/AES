@@ -3,7 +3,7 @@
 using AES;
 
 // Test vector from NIST FIPS-197, Appendix B, AES-128 example, SubBytes
-public class SubBytesTests
+public class SubBytesTest
 {
     [Fact]
     public void Row0Test()
